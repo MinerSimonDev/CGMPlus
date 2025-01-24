@@ -1,10 +1,11 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
-require('dotenv').config()
+require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
 const MONGO_URI = process.env.MONGO_URI;
+console.log("MongoDB URI:", MONGO_URI);
 const client = new MongoClient(MONGO_URI);
 
 let db;
@@ -18,17 +19,41 @@ async function connectDB() {
 
 connectDB();
 
-// api endpoint: fetch new data
+// api endpoint: fetch new data with a time filter
 app.get("/data", async (req, res) => {
-  const data = await db.collection("entries").find().sort({ timestamp: -1 }).limit(100).toArray();
-  res.json(data);
-});
+  const { period, unit } = req.query; // "days" or "hours"
 
-// api endpoint: add new data
-app.post("/add", express.json(), async (req, res) => {
-  const newEntry = req.body;
-  await db.collection("entries").insertOne(newEntry);
-  res.json({ message: "Eintrag hinzugefügt" });
+  if (!period || !unit || isNaN(period)) {
+    return res.status(400).json({ error: "Bitte gib einen gültigen Zeitraum (Zahl und Einheit) an." });
+  }
+
+  // calc date
+  let timeFilter;
+  const currentTime = new Date();
+
+  if (unit === "days") {
+    timeFilter = new Date(currentTime.setDate(currentTime.getDate() - period)); // X Tage zurück
+  } else if (unit === "hours") {
+    timeFilter = new Date(currentTime.setHours(currentTime.getHours() - period)); // X Stunden zurück
+  } else {
+    return res.status(400).json({ error: "Die Einheit muss entweder 'days' oder 'hours' sein." });
+  }
+
+  try {
+    const data = await db
+      .collection("entries")
+      .find({
+        dateString: { $gte: timeFilter.toISOString() } // Filter nach dem ISO-Format von dateString
+      })
+      .sort({ dateString: -1 })
+      .toArray();
+
+
+    res.json(data);
+  } catch (err) {
+    console.error("Fehler bei der Datenabfrage:", err);
+    res.status(500).json({ error: "Fehler bei der Datenabfrage" });
+  }
 });
 
 // start server on port 3000
