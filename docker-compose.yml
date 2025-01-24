@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  nodejs:
+    build: ./nodejs
+    container_name: nodejs
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+
+  python:
+    build: ./python
+    container_name: python
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "8080:80"
+
+volumes:
+  mongo_data:
