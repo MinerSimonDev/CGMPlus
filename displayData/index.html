@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Visualizer</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    canvas {
+      width: 90%; /* Vergrößert den Graphen */
+      height: 500px; /* Setzt eine feste Höhe für den Graphen */
+      margin: 20px auto;
+    }
+    .upload-container {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Graph Visualizer</h1>
+  <div class="upload-container">
+    <input type="file" id="fileInput" accept=".txt" />
+    <p>Upload a text file to visualize its data.</p>
+  </div>
+  <canvas id="myChart"></canvas>
+
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const ctx = document.getElementById("myChart").getContext("2d");
+
+    let chart; // Variable to store the chart instance
+
+    // Function to parse the uploaded file
+    fileInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (!file) {
+        alert("No file selected.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          // Parse the file content as JSON
+          const data = JSON.parse(e.target.result);
+          visualizeData(data);
+        } catch (error) {
+          alert("Failed to parse the file. Make sure it's a valid JSON text file.");
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // Function to visualize the data in a graph
+    function visualizeData(data) {
+      // Ensure data is an array
+      if (!Array.isArray(data)) {
+        alert("Invalid data format. Expected an array of entries.");
+        return;
+      }
+
+      // Extract labels (dates) and values (sgv values)
+      const labels = data.map((entry) =>
+        entry.dateString
+          ? new Date(entry.dateString).toLocaleString() // Use dateString if available
+          : new Date(entry.date).toLocaleString()
+      );
+      const values = data.map((entry) => entry.sgv);
+
+      // Destroy the old chart if it exists
+      if (chart) {
+        chart.destroy();
+      }
+
+      // Create a new chart
+      chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "SGV Values",
+              data: values,
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              borderWidth: 2,
+              pointRadius: 3,
+              tension: 0.1, // Smooth the line
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Time",
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 10, // Limit the number of displayed labels
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "SGV",
+              },
+            },
+          },
+        },
+      });
+    }
+  </script>
+</body>
+</html>

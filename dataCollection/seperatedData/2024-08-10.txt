@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "66b7fe465fc96349afcc83d1",
+    "device": "xDrip-LibreReceiver",
+    "date": 1723334212614,
+    "dateString": "2024-08-10T23:56:52.614Z",
+    "sgv": 210,
+    "delta": -1.003,
+    "direction": "Flat",
+    "type": "sgv",
+    "filtered": 208000,
+    "unfiltered": 208000,
+    "rssi": 100,
+    "noise": 1,
+    "sysTime": "2024-08-10T23:56:52.614Z",
+    "utcOffset": 120
+  }
+]
