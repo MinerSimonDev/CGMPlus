@@ -36,4 +36,3 @@ print(glucose.head())
 
 # count | mean | std | min | 25% | 50% | 75% | max
 print(glucose.describe().transpose())
-

@@ -4,48 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea0dfcba-6011-4f88-a8a9-364c98a24b56" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/web-backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-backend/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-backend/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/web-frontend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/.prettierrc.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/web-frontend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/eslint.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/web-frontend/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/assets/base.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/assets/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/assets/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/TheWelcome.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/WelcomeItem.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/__tests__/HelloWorld.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/icons/IconCommunity.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/icons/IconDocumentation.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/icons/IconEcosystem.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/icons/IconSupport.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/components/icons/IconTooling.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/router/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/stores/counter.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/views/AboutView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/src/views/HomeView.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-frontend/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/tsconfig.node.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/tsconfig.vitest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-frontend/vite.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-frontend/vitest.config.ts" beforeDir="false" />
-    </list>
+    <list default="true" id="ea0dfcba-6011-4f88-a8a9-364c98a24b56" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
