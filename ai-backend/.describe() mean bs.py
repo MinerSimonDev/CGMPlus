@@ -46,7 +46,7 @@ print(glucose.describe().transpose())
 plt.figure(figsize=(10,4))
 sns.boxplot(x=glucose['sgv'])
 plt.title('Blood Glucose Interquartile Range, mu=144')
-plt.show()
+#plt.show()
 
 # verteilung auf die wochentage
 
@@ -57,11 +57,11 @@ glucose = glucose.rename(columns={'sgv': 'Glucose Value (mg/dl)'})  # Umbenennen
 fig = px.box(glucose, x="Day", y="Glucose Value (mg/dl)", points="all", color='Day')
 
 # Anzeigen des Plots
-fig.show()
+#fig.show()
 
-print("Spaltennamen im DataFrame:", df.columns.tolist())
-print(df.head())  # Zeigt die ersten Zeilen des DataFrames
-print(df.info())
+#print("Spaltennamen im DataFrame:", df.columns.tolist())
+#print(df.head())  # Zeigt die ersten Zeilen des DataFrames
+#print(df.info())
 
 glucose['BG Rate of Change'] = glucose['Glucose Value (mg/dl)'].diff() / 5
 glucose[['timestamp', 'Glucose Value (mg/dl)', 'BG Rate of Change']].head()
@@ -71,4 +71,48 @@ bg_roc_mean = glucose['BG Rate of Change'].mean()
 sns.histplot(data=glucose, x='BG Rate of Change',binrange=(-5,5))
 plt.title(f'Histogram of BG Rate of Change. mu = {bg_roc_mean:.2f}, sigma = {bg_roc_std:.2f}')
 plt.xlabel('BG Rate of Change (mg/dL/minute)')
-plt.show()
+#plt.show()
+
+# get entries in those ranges
+ranges = [0,70,180,300]
+glucose['ranges'] = pd.cut(glucose['Glucose Value (mg/dl)'], bins = ranges)
+result = (glucose.groupby([pd.Grouper(key='timestamp', freq='D'), "ranges"])["ranges"].count().unstack(0).T.fillna(0))
+
+summed_results = result.sum()
+print(summed_results)
+
+# calculate %
+print(f'Unterzucker (<70): {summed_results.iloc[0] * 100 / (summed_results.sum())}%')
+print(f'Unterzucker (>70 && <180): {summed_results.iloc[1] * 100 / (summed_results.sum())}%')
+print(f'Unterzucker (>180): {summed_results.iloc[2] * 100 / (summed_results.sum())}%')
+
+import plotly.express as px
+
+print(glucose.columns)
+
+glucose['Aggregate'] = [180 if glucose_val >= 180 else 70 if glucose_val <= 70 else 110 for glucose_val in glucose['Glucose Value (mg/dl)']]
+glucose[['timestamp', 'Glucose Value (mg/dl)', 'Aggregate']]
+
+fig = px.line(glucose, 
+              x="timestamp", 
+              y=["Glucose Value (mg/dl)", "Aggregate"], 
+              title="Glucose Value Vs. Time", 
+              labels={"Glucose Value (mg/dl)": "Glucose Fluctuation", 
+                      "Aggregate": "Aggregate Blood Glucose"})
+
+fig.update_xaxes(
+    rangeslider_visible=True,
+    rangeselector=dict(
+        buttons=list([
+            dict(count=1, label="1d", step="day", stepmode="backward"),
+            dict(count=1, label="1m", step="month", stepmode="backward"),
+            dict(count=1, label="YTD", step="year", stepmode="todate"),
+            dict(count=1, label="1y", step="year", stepmode="backward"),
+            dict(step="all")
+        ])
+    )
+)
+
+fig.update_layout(xaxis_title="Time", yaxis_title="Glucose Value (mg/dL)")
+
+fig.show()
